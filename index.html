@@ -7,8 +7,39 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1></h1>
+    <nav></nav>
     <div id="root"></div>
-    <script src="main.js"></script>
+    <script>
+      const URL = "https://rickandmortyapi.com/api/character/";
+
+      const fetchData = async () => {
+        const res = await fetch(URL);
+        const { results } = await res.json();
+
+        return results;
+      };
+
+      const render = async () => {
+        const data = await fetchData();
+        const container = document.getElementById("root");
+
+        data.forEach((character) => {
+          const card = document.createElement("div");
+
+          card.innerHTML = `
+            <h2 class="title" >${character.name}</h2>
+            <p class="status">${character.status}</p>
+            <p>${character.species}</p>
+            <p>${character.gender}</p>
+            <p>${character.origin.name}</p>
+            <img src="${character.image}" />
+        `;
+
+          container.appendChild(card);
+        });
+      };
+
+      render();
+    </script>
   </body>
 </html>
