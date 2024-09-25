@@ -3,15 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PAGINA PRUEBA</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Series</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
   </head>
+  <style>
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  </style>
   <body>
-    <nav></nav>
-    <div id="root"></div>
+    <nav class="container navbar">
+      <h1 class="title navbar-title" aria-label="Close">RICK AND MORTY</h1>
+      <img
+        src="https://www.shutterstock.com/image-photo/tyumen-russiaaugust-27-2021-rick-260nw-2072518541.jpg"
+        alt="Rick and Morty"
+        class="navbar-img"
+      />
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Characters</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="episodes.html">Episodes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="locations.html">Locations</a>
+        </li>
+      </ul>
+    </nav>
+    <label for="root" class="container main">
+      <input
+        type="text"
+        name=""
+        id="text_search"
+        placeholder="buscar personaje"
+      />
+
+      <button class="button">Buscar</button>
+    </label>
+    <div class="container main" id="root"></div>
     <script>
       const URL = "https://rickandmortyapi.com/api/character/";
 
+      const searchPersonaje = document.getElementById("text_search");
+
+      // consultar los datos de la api
       const fetchData = async () => {
         const res = await fetch(URL);
         const { results } = await res.json();
@@ -23,11 +68,12 @@
         const data = await fetchData();
         const container = document.getElementById("root");
 
+        // iterando para elemento para mostrar
         data.forEach((character) => {
           const card = document.createElement("div");
 
           card.innerHTML = `
-            <h2 class="title" >${character.name}</h2>
+            <h2 >${character.name}</h2>
             <p class="status">${character.status}</p>
             <p>${character.species}</p>
             <p>${character.gender}</p>
