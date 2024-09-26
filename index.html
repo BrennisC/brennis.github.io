@@ -10,18 +10,61 @@
     />
   </head>
   <style>
-    img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
+    #root {
+      display: flex;
+      column-gap: 100px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0d0c0c;
+      color: #ffffff;
+      padding: 10px;
+    }
+    .navbar-title {
+      font-size: 24px;
+      margin: 0;
+    }
+    .navbar-nav {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    .navbar-nav li {
+      margin: 0 10px;
+    }
+    .navbar-img {
+      width: 300px;
+      height: 150px;
       margin: 10px;
       display: flex;
       align-items: flex-start;
       justify-content: center;
     }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
   <body>
-    <nav class="container navbar">
+    <nav class="container">
       <h1 class="title navbar-title" aria-label="Close">RICK AND MORTY</h1>
       <img
         src="https://www.shutterstock.com/image-photo/tyumen-russiaaugust-27-2021-rick-260nw-2072518541.jpg"
@@ -48,44 +91,9 @@
         placeholder="buscar personaje"
       />
 
-      <button class="button">Buscar</button>
+      <button class="button" id="button_search">Buscar</button>
     </label>
     <div class="container main" id="root"></div>
-    <script>
-      const URL = "https://rickandmortyapi.com/api/character/";
-
-      const searchPersonaje = document.getElementById("text_search");
-
-      // consultar los datos de la api
-      const fetchData = async () => {
-        const res = await fetch(URL);
-        const { results } = await res.json();
-
-        return results;
-      };
-
-      const render = async () => {
-        const data = await fetchData();
-        const container = document.getElementById("root");
-
-        // iterando para elemento para mostrar
-        data.forEach((character) => {
-          const card = document.createElement("div");
-
-          card.innerHTML = `
-            <h2 >${character.name}</h2>
-            <p class="status">${character.status}</p>
-            <p>${character.species}</p>
-            <p>${character.gender}</p>
-            <p>${character.origin.name}</p>
-            <img src="${character.image}" />
-        `;
-
-          container.appendChild(card);
-        });
-      };
-
-      render();
-    </script>
+    <script src="./components/main.js"></script>
   </body>
 </html>
